@@ -75,7 +75,7 @@ def pregunta_03():
     df = pd.read_csv("gm_2008_region.csv")
 
     # Asigne a la variable los valores de la columna `fertility`
-     X_fertility = df.fertility
+    X_fertility = df.fertility
 
     # Asigne a la variable los valores de la columna `life`
     y_life = df.life
@@ -100,7 +100,7 @@ def pregunta_03():
     y_pred = reg.predict(prediction_space)
 
     # Imprima el R^2 del modelo con 4 decimales
-    print(reg.score(y_life, y_tpred).round(4))
+    print(reg.score(y_life, y_pred).round(4))
 
 
 def pregunta_04():
