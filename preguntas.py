@@ -28,10 +28,10 @@ def pregunta_01():
     print(X.shape)
 
     # Transforme `y` a un array de numpy usando reshape
-    y_reshaped = y.reshape(y.shape[0], 1)
+    y_reshaped = y.reshape(-1, 1)
 
     # Trasforme `X` a un array de numpy usando reshape
-    X_reshaped = X.reshape(X.shape[0], 1)
+    X_reshaped = X.reshape(-1, 1)
 
     # Imprima las nuevas dimensiones de `y`
     print(y_reshaped.shape)
@@ -53,7 +53,7 @@ def pregunta_02():
     print(df.shape)
 
     # Imprima la correlación entre las columnas `life` y `fertility` con 4 decimales.
-    print(df[["life", "fertility"]].corr().round(4))
+    print(df[["fertility", "life"]].corr().round(4))
 
     # Imprima la media de la columna `life` con 4 decimales.
     print(round(df.life.median(),4))
@@ -91,7 +91,7 @@ def pregunta_03():
     prediction_space = np.linspace(
         X_fertility.min(),
         X_fertility.max(),
-    ).reshape(50, 1)
+    ).reshape(-1, 1)
 
     # Entrene el modelo usando X_fertility y y_life
     reg.fit(X_fertility, y_life)
@@ -138,12 +138,12 @@ def pregunta_04():
     linearRegression = LinearRegression()
 
     # Entrene el clasificador usando X_train y y_train
-    linearRegression.fit(X_train, y_train)
+    linearRegression.fit(X_train.reshape(-1,1), y_train.reshape(-1,1))
 
     # Pronostique y_test usando X_test
-    y_pred = linearRegression.predict(X_test)
+    y_pred = linearRegression.predict(X_test.reshape(-1,1))
 
     # Compute and print R^2 and RMSE
-    print("R^2: {:6.4f}".format(linearRegression.score(X_test, y_test)))
+    print("R^2: {:6.4f}".format(linearRegression.score(X_test.reshape(-1,1), y_test.reshape(-1,1))))
     rmse = np.sqrt(mean_squared_error(y_test, y_pred))
     print("Root Mean Squared Error: {:6.4f}".format(rmse))
