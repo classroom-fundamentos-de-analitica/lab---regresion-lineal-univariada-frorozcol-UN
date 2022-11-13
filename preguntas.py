@@ -138,12 +138,12 @@ def pregunta_04():
     linearRegression = LinearRegression()
 
     # Entrene el clasificador usando X_train y y_train
-    linearRegression.fit(X_train.reshape(-1,1), y_train.reshape(-1,1))
+    linearRegression.fit(X_train, y_train.reshape(-1,1))
 
     # Pronostique y_test usando X_test
-    y_pred = linearRegression.predict(X_test.reshape(-1,1))
+    y_pred = linearRegression.predict(X_test)
 
     # Compute and print R^2 and RMSE
-    print("R^2: {:6.4f}".format(linearRegression.score(X_test.reshape(-1,1), y_test.reshape(-1,1))))
+    print("R^2: {:6.4f}".format(linearRegression.score(X_test, y_test.reshape(-1,1))))
     rmse = np.sqrt(mean_squared_error(y_test, y_pred))
     print("Root Mean Squared Error: {:6.4f}".format(rmse))
