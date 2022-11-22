@@ -53,11 +53,7 @@ def pregunta_02():
     print(df.shape)
 
     # Imprima la correlación entre las columnas `life` y `fertility` con 4 decimales.
-<<<<<<< HEAD
-    print(df[["life", "fertility"]].corr().round(4).iloc[0,1])
-=======
     print(df[["life", "fertility"]].corr().round(4))
->>>>>>> fe15a3484bb1a02328aca355bfced6e0ee1f4054
 
     # Imprima la media de la columna `life` con 4 decimales.
     print(round(df.life.median(),4))
