@@ -53,7 +53,7 @@ def pregunta_02():
     print(df.shape)
 
     # Imprima la correlación entre las columnas `life` y `fertility` con 4 decimales.
-    print(df[["fertility", "life"]].corr().round(4))
+    print(df[["life", "fertility"]].corr().round(4).iloc[0,1])
 
     # Imprima la media de la columna `life` con 4 decimales.
     print(round(df.life.median(),4))
@@ -62,7 +62,7 @@ def pregunta_02():
     print(df.fertility.dtype)
 
     # Imprima la correlación entre las columnas `GDP` y `life` con 4 decimales.
-    print(df[["GDP", "life"]].corr().round(4))
+    print(df[["GDP", "life"]].corr().round(4).iloc[0,1])
 
 
 def pregunta_03():
@@ -75,10 +75,10 @@ def pregunta_03():
     df = pd.read_csv("gm_2008_region.csv")
 
     # Asigne a la variable los valores de la columna `fertility`
-    X_fertility = df.fertility
+    X_fertility = df.fertility.values.reshape(-1,1)
 
     # Asigne a la variable los valores de la columna `life`
-    y_life = df.life
+    y_life = df.life.values
 
     # Importe LinearRegression
     from sklearn.linear_model import LinearRegression
@@ -100,7 +100,7 @@ def pregunta_03():
     y_pred = reg.predict(prediction_space)
 
     # Imprima el R^2 del modelo con 4 decimales
-    print(reg.score(y_life, y_pred).round(4))
+    print(reg.score(X_fertility,y_life).round(4))
 
 
 def pregunta_04():
@@ -138,12 +138,16 @@ def pregunta_04():
     linearRegression = LinearRegression()
 
     # Entrene el clasificador usando X_train y y_train
-    linearRegression.fit(X_train, y_train.reshape(-1,1))
+    linearRegression.fit(X_train.values.reshape(-1,1), y_train)
 
     # Pronostique y_test usando X_test
-    y_pred = linearRegression.predict(X_test)
+    y_pred = linearRegression.predict(X_test.values.reshape(-1,1))
 
     # Compute and print R^2 and RMSE
-    print("R^2: {:6.4f}".format(linearRegression.score(X_test, y_test.reshape(-1,1))))
+    print("R^2: {:6.4f}".format(linearRegression.score(X_test.values.reshape(-1,1), y_test)))
     rmse = np.sqrt(mean_squared_error(y_test, y_pred))
     print("Root Mean Squared Error: {:6.4f}".format(rmse))
+
+
+if __name__ == "__main__":
+    pregunta_03()
